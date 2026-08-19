@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Próximos Passos · Coragem Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1a1917;
+      --text: #e8e2d9;
+      --text-muted: #9a9188;
+      --gold: #c9a96e;
+      --divider: #c9a96e44;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 0 1.5rem;
+    }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 5rem 0 6rem;
+    }
+    .label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3rem;
+    }
+    .label span { opacity: 0.5; margin: 0 0.4em; }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 7vw, 4.2rem);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+    .intro {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text);
+      opacity: 0.85;
+      margin-bottom: 2rem;
+    }
+    .divider {
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+      margin: 2.5rem 0;
+    }
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .metodo { margin-bottom: 3rem; }
+    .metodo-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .metodo-subtitulo {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+    .metodo-texto {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: var(--text);
+      opacity: 0.75;
+    }
+    .metodo-separador {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+      margin: 2.5rem 0;
+    }
+    .cta-section { margin-top: 3rem; }
+    .cta-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: var(--text);
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      text-decoration: none;
+      padding: 1rem 2rem;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+    .alt-section { margin-top: 2.5rem; }
+    .alt-texto {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+    .alt-link {
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .alt-link:hover { opacity: 0.9; }
+    .footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--divider);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      opacity: 0.4;
+    }
+    @media (max-width: 480px) {
+      .container { padding: 3.5rem 0 4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="label">Coragem Lab <span>·</span> Próximos Passos</div>
+    <h1>O mapa<br>mostrou onde<br>você <em>está.</em></h1>
+    <p class="intro">O próximo passo depende do que está pedindo atenção agora.</p>
+    <div class="divider"></div>
+    <div class="section-label">Os caminhos</div>
+    <div class="metodo">
+      <div class="metodo-subtitulo">Para quando o sistema está sobrecarregado</div>
+      <div class="metodo-titulo">Método Integrativo</div>
+      <p class="metodo-texto">
+        Para quando algo está sendo carregado em silêncio, mesmo que tudo ainda esteja funcionando.
+        O trabalho cria espaço para o que está pesando aparecer e ter um lugar.
+        Funciona em ciclos de seis sessões, no ritmo do que vai surgindo.
+      </p>
+    </div>
+    <div class="metodo-separador"></div>
+    <div class="metodo">
+      <div class="metodo-subtitulo">Para quando há energia e uma transição pedindo direção</div>
+      <div class="metodo-titulo">C.O.R.A.G.E.M. 2.0</div>
+      <p class="metodo-texto">
+        Para momentos de transição concreta, quando a vida está mudando e algo precisa se reposicionar junto.
+        São dez sessões, cada uma trabalhando uma dimensão do processo.
+        Ao final, você sai com um sistema de autogestão que continua funcionando depois.
+      </p>
+    </div>
+    <div class="divider"></div>
+    <div class="cta-section">
+      <p class="cta-texto">Os dois caminhos começam pelo mesmo lugar: uma sessão gratuita. Nela, a gente vê onde você está e o que está pedindo atenção; e reconhece os recursos que você já tem pra seguir.</p>
+      <a class="cta-btn" href="https://wa.me/34687480445?text=Olá%2C%20recebi%20meu%20Mapa%20da%20Coragem%20e%20quero%20marcar%20minha%20sessão%20gratuita" target="_blank">
+        Quero minha sessão gratuita →
+      </a>
+    </div>
+    <div class="alt-section">
+      <p class="alt-texto">Ainda não é o momento de marcar a sessão?</p>
+      <a class="alt-link" href="https://hotm.io/fncqSg0s">
+        Comece por conta própria →
+      </a>
+    </div>
+    <div class="footer">
+      Coragem Lab · coragemlab.github.io
+    </div>
+  </div>
+</body>
+</html>
