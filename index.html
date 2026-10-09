@@ -1,418 +1,240 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mapa da Coragem · Coragem Lab</title>
-<meta name="description" content="Um mapeamento gratuito que mostra em qual área da sua vida a energia está em movimento agora, e onde está pedindo atenção.">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --cream: #F5F0E8;
-    --ink: #1C1A16;
-    --ink-light: #6B6659;
-    --gold: #A8884A;
-    --gold-light: #C4A46A;
-    --border: rgba(168, 136, 74, 0.25);
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Outfit', sans-serif;
-    background-color: var(--ink);
-    color: var(--cream);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  .container {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4rem 0 3rem;
-  }
-
-  .eyebrow {
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 8vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--cream);
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
-
-  .hero-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-    font-weight: 300;
-    color: rgba(245, 240, 232, 0.65);
-    margin-top: 1.75rem;
-    line-height: 1.6;
-    max-width: 480px;
-  }
-
-  .divider {
-    width: 48px;
-    height: 1px;
-    background: var(--gold);
-    margin: 2.5rem 0;
-    opacity: 0.6;
-  }
-
-  .hero-body {
-    font-size: 1rem;
-    font-weight: 300;
-    color: rgba(245, 240, 232, 0.7);
-    line-height: 1.8;
-    max-width: 460px;
-  }
-
-  .scroll-hint {
-    margin-top: 4rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    color: var(--ink-light);
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-
-  .scroll-line {
-    width: 32px;
-    height: 1px;
-    background: var(--ink-light);
-  }
-
-  /* SEÇÕES */
-  .section {
-    padding: 5rem 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 400;
-    margin-bottom: 3rem;
-  }
-
-  /* STEPS */
-  .steps { display: flex; flex-direction: column; }
-
-  .step {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 1.5rem;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .step:last-child { border-bottom: none; }
-
-  .step-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--gold);
-    opacity: 0.5;
-    line-height: 1;
-    padding-top: 0.2rem;
-  }
-
-  .step-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
-    font-weight: 400;
-    color: var(--cream);
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
-  }
-
-  .step-body {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: rgba(245, 240, 232, 0.6);
-    line-height: 1.75;
-  }
-
-  /* CAMADAS */
-  .layers { padding: 5rem 0; border-top: 1px solid var(--border); }
-
-  .layers-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    font-weight: 300;
-    color: var(--cream);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .layers-body {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: rgba(245, 240, 232, 0.6);
-    line-height: 1.8;
-    max-width: 440px;
-    margin-bottom: 3rem;
-  }
-
-  .layer-list { display: flex; flex-direction: column; }
-
-  .layer-item {
-    display: flex;
-    align-items: baseline;
-    gap: 1.25rem;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .layer-item:last-child { border-bottom: none; }
-
-  .layer-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--cream);
-    min-width: 160px;
-    flex-shrink: 0;
-  }
-
-  .layer-desc {
-    font-size: 0.85rem;
-    font-weight: 300;
-    color: rgba(245, 240, 232, 0.5);
-    line-height: 1.6;
-    font-style: italic;
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  /* CTA */
-  .cta-section {
-    padding: 5rem 0 6rem;
-    border-top: 1px solid var(--border);
-    text-align: center;
-  }
-
-  .cta-label {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-  }
-
-  .cta-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 300;
-    color: var(--cream);
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-
-  .cta-body {
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: rgba(245, 240, 232, 0.55);
-    line-height: 1.8;
-    margin: 0 auto 2.5rem;
-    max-width: 360px;
-  }
-
-  .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2.25rem;
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .cta-btn:hover {
-    background: var(--gold);
-    color: var(--ink);
-  }
-
-  .cta-note {
-    margin-top: 1.25rem;
-    font-size: 0.8rem;
-    color: rgba(245, 240, 232, 0.3);
-    font-weight: 300;
-  }
-
-  /* FOOTER */
-  .footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-brand {
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    font-weight: 400;
-  }
-
-  .footer-back {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    font-weight: 400;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .footer-back:hover { color: var(--gold); }
-
-  /* ANIMAÇÕES */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
-  .hero .eyebrow       { animation-delay: 0.10s; }
-  .hero .hero-title    { animation-delay: 0.25s; }
-  .hero .hero-subtitle { animation-delay: 0.40s; }
-  .hero .divider       { animation-delay: 0.50s; }
-  .hero .hero-body     { animation-delay: 0.60s; }
-  .hero .scroll-hint   { animation-delay: 0.80s; }
-
-  /* MOBILE */
-  @media (max-width: 480px) {
-    .layer-item { flex-direction: column; gap: 0.25rem; }
-    .layer-name { min-width: unset; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Próximos Passos · Coragem Lab</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1a1917;
+      --text: #e8e2d9;
+      --text-muted: #9a9188;
+      --gold: #c9a96e;
+      --divider: #c9a96e44;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 0 1.5rem;
+    }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 5rem 0 6rem;
+    }
+    .label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3rem;
+    }
+    .label span { opacity: 0.5; margin: 0 0.4em; }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 7vw, 4.2rem);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    h1 em { font-style: italic; color: var(--gold); }
+    .intro {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text);
+      opacity: 0.85;
+      margin-bottom: 2rem;
+    }
+    .divider {
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+      margin: 2.5rem 0;
+    }
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .metodo { margin-bottom: 3rem; }
+    .metodo-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .metodo-subtitulo {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+    .metodo-texto {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: var(--text);
+      opacity: 0.75;
+    }
+    .metodo-link {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .metodo-link:hover { opacity: 1; }
+    .metodo-separador {
+      width: 100%;
+      height: 1px;
+      background: var(--divider);
+      margin: 2.5rem 0;
+    }
+    .cta-section { margin-top: 3rem; }
+    .cta-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: var(--text);
+      opacity: 0.9;
+      margin-bottom: 1.2rem;
+    }
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      text-decoration: none;
+      padding: 1rem 2rem;
+      margin-top: 0.8rem;
+      transition: opacity 0.2s;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+    .alt-section { margin-top: 2.5rem; }
+    .alt-texto {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+    .alt-link {
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .alt-link:hover { opacity: 0.9; }
+    .footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--divider);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      opacity: 0.4;
+    }
+    @media (max-width: 480px) {
+      .container { padding: 3.5rem 0 4rem; }
+    }
+  </style>
 </head>
 <body>
-
-<div class="container">
-
-  <section class="hero">
-    <p class="eyebrow">Coragem Lab · Instrumento</p>
-    <h1 class="hero-title">Mapa da<br><em>Coragem</em></h1>
-    <p class="hero-subtitle">Um mapeamento gratuito que mostra em qual área da sua vida a energia está em movimento agora, e onde está pedindo atenção.</p>
+  <div class="container">
+    <div class="label">Coragem Lab <span>·</span> Próximos Passos</div>
+    <h1>O mapa<br>mostrou onde<br>você <em>está.</em></h1>
+    <p class="intro">O próximo passo depende do que está pedindo atenção agora.</p>
     <div class="divider"></div>
-    <p class="hero-body">Você responde. Em até 48h, recebe seu resultado.</p>
-    <div class="scroll-hint">
-      <span class="scroll-line"></span>
-      <span>Como funciona</span>
+    <div class="section-label">Os caminhos</div>
+
+    <div class="metodo">
+      <div class="metodo-subtitulo">Para quando o sistema está sobrecarregado</div>
+      <div class="metodo-titulo">Método Integrativo</div>
+      <p class="metodo-texto">
+        Para quando algo está sendo carregado em silêncio, mesmo que tudo ainda esteja funcionando.
+        O trabalho cria espaço para o que está pesando aparecer e ter um lugar.
+        Funciona em ciclos de seis sessões, no ritmo do que vai surgindo.
+      </p>
     </div>
-  </section>
 
-  <section class="section">
-    <div class="steps">
-      <div class="step">
-        <span class="step-num">01</span>
-        <div>
-          <h3 class="step-title">Você responde ao mapeamento</h3>
-          <p class="step-body">Uma série de perguntas sobre o que você está vivendo agora. Leva cerca de 10 minutos.</p>
-        </div>
-      </div>
-      <div class="step">
-        <span class="step-num">02</span>
-        <div>
-          <h3 class="step-title">Seu resultado chega em até 48h</h3>
-          <p class="step-body">Uma leitura personalizada das suas cinco camadas: onde está em movimento e onde está pedindo atenção.</p>
-        </div>
-      </div>
-      <div class="step">
-        <span class="step-num">03</span>
-        <div>
-          <h3 class="step-title">O mapa é seu</h3>
-          <p class="step-body">Você pode seguir a vida com ele. Ou pode querer entender mais a partir do que o resultado mostrou.</p>
-        </div>
-      </div>
+    <div class="metodo-separador"></div>
+
+    <div class="metodo">
+      <div class="metodo-subtitulo">Para quando você sabe onde está e onde quer chegar</div>
+      <div class="metodo-titulo">C.O.R.A.G.E.M. 2.0</div>
+      <p class="metodo-texto">
+        Para momentos de transição concreta, quando a vida está mudando e algo precisa se reposicionar junto.
+        São dez encontros individuais, cada um trabalhando uma dimensão do processo.
+        Ao final, você sai com um sistema de autogestão que continua funcionando depois.
+      </p>
     </div>
-  </section>
 
-  <section class="layers">
-    <p class="section-label">O que o mapa observa</p>
-    <h2 class="layers-title">Cinco camadas<br>da coragem</h2>
-    <p class="layers-body">Cada camada está sempre presente. O que muda é o quanto cada uma está em movimento agora, e o quanto está estável.</p>
-    <div class="layer-list">
-      <div class="layer-item">
-        <span class="layer-name">Camada primária</span>
-        <span class="layer-desc">corpo, energia, limites físicos</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-name">Camada social</span>
-        <span class="layer-desc">vínculos, conflito, pertencimento</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-name">Camada interna</span>
-        <span class="layer-desc">identidade, direção, escolhas</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-name">Camada integrada</span>
-        <span class="layer-desc">coerência, estabilidade emocional</span>
-      </div>
-      <div class="layer-item">
-        <span class="layer-name">Camada plena</span>
-        <span class="layer-desc">contribuição, presença, expansão</span>
-      </div>
+    <div class="metodo-separador"></div>
+
+    <div class="metodo">
+      <div class="metodo-subtitulo">Para quando a direção já está escolhida e falta o plano</div>
+      <div class="metodo-titulo">Ciclo Estratégico</div>
+      <p class="metodo-texto">
+        Doze encontros ao vivo, em grupo, ao longo de quatro meses.
+        O plano de ação nasce dos pilares e das camadas do Mapa da Coragem, com passos e prazos para o seu próximo ciclo.
+      </p>
+      <a class="metodo-link" href="https://coragemlab.github.io/Coragem-Lab/ciclo-estrategico/">Conhecer o Ciclo Estratégico →</a>
     </div>
-  </section>
 
- <section class="cta-section">
-    <h2 class="cta-title">Responder ao<br>mapeamento</h2>
-    <p class="cta-body">Você responde. Em até 48h, recebe seu resultado.</p>
-    <a class="cta-btn" href="https://forms.gle/jWaKUPvWyw1ksSUG8" target="_blank" rel="noopener">
-      Acessar o mapeamento →
-    </a>
-    <p class="cta-note">Gratuito. Leva cerca de 10 minutos.</p>
-</section>
-
-  <footer class="footer">
-    <span class="footer-brand">Coragem Lab</span>
-    <a class="footer-back" href="https://coragemlab.github.io/ecosystem/">← Voltar ao ecossistema</a>
-  </footer>
-
-</div>
-
+    <div class="divider"></div>
+    <div class="cta-section">
+      <p class="cta-texto">O Método Integrativo e a C.O.R.A.G.E.M. 2.0 começam por uma Sessão de Alinhamento. Em 40 minutos, a gente vê onde você está, o que está pedindo atenção e quais recursos você já tem para seguir.</p>
+      <p class="cta-texto">O Ciclo Estratégico começa pela aplicação, e a Sessão de Alinhamento acontece em seguida.</p>
+      <a class="cta-btn" href="https://wa.me/34687480445?text=Olá%2C%20recebi%20meu%20Mapa%20da%20Coragem%20e%20quero%20marcar%20minha%20sessão" target="_blank">
+        Quero minha Sessão de Alinhamento →
+      </a>
+    </div>
+    <div class="alt-section">
+      <p class="alt-texto">Ainda não é o momento de marcar a sessão?</p>
+      <a class="alt-link" href="https://coragemlab.github.io/Coragem-Lab/">
+        Comece por conta própria →
+      </a>
+    </div>
+    <div class="footer">
+      Coragem Lab · coragemlab.github.io
+    </div>
+  </div>
 </body>
 </html>
